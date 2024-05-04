@@ -16,19 +16,19 @@ namespace Calculadora
             }
             return operacao;
         }
-        public int soma(Operacoes operacao)
+        public long soma(Operacoes operacao)
         {
             return operacao.valorA + operacao.valorB;
         }
-        public int subtracao(Operacoes operacao)
+        public long subtracao(Operacoes operacao)
         {
             return operacao.valorA - operacao.valorB;
         }
-        public int multiplicacao(Operacoes operacao)
+        public long multiplicacao(Operacoes operacao)
         {
             return operacao.valorA * operacao.valorB;
         }
-        public int divisao(Operacoes operacao)
+        public long divisao(Operacoes operacao)
         {
 
             return operacao.valorA / operacao.valorB;
