@@ -6,13 +6,20 @@ namespace Calculadora
 {
     class Program
     {
+        /// <summary>
+        /// Inicia o progama montando a fila de operações e iniciando o processamento.
+        /// </summary>
         static void Main()
         {
-            Queue<Operacoes> filaOperacoes = InicializarOperacoes();
+            Queue<Operacoes> filaOperacoes = InicializarFila();
             ProcessarOperacoes(filaOperacoes);
         }
 
-        private static Queue<Operacoes> InicializarOperacoes()
+
+        /// <summary>
+        /// Monta a fila de operações.
+        /// </summary>
+        private static Queue<Operacoes> InicializarFila()
         {
             return new Queue<Operacoes>(new[]
             {
@@ -24,6 +31,10 @@ namespace Calculadora
         });
         }
 
+        /// <summary>
+        /// Inicia o processamento da fila de operações.
+        /// </summary>
+        /// <param name="filaOperacoes">A fila de operações.</param>
         private static void ProcessarOperacoes(Queue<Operacoes> filaOperacoes)
         {
             Stack<Operacoes> stackResultados = new();

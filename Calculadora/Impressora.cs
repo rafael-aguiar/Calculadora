@@ -8,15 +8,15 @@ namespace Calculadora
         /// <summary>
         /// Imprime todas as operações na fila.
         /// </summary>
-        /// <param name="fila">A fila de operações que será impressa.</param>
-        public static void ImprimirFila(Queue<Operacoes> fila)
+        /// <param name="filaOperacoes">A fila de operações que será impressa.</param>
+        public static void ImprimirFila(Queue<Operacoes> filaOperacoes)
         {
-            if (!ValidarFila(fila))
+            if (!ValidarFila(filaOperacoes))
                 return;
 
             ImprimirSeparador();
             ImprimirMensagem("Próximas operações na fila:", ConsoleColor.Yellow);
-            ImprimirOperacoes(fila);
+            ImprimirOperacoes(filaOperacoes);
             ImprimirSeparador();
         }
 
@@ -53,11 +53,11 @@ namespace Calculadora
         /// <summary>
         /// Valida se a fila de operações está vazia e imprime uma mensagem caso esteja.
         /// </summary>
-        /// <param name="fila">A fila de operações que será validada.</param>
+        /// <param name="filaOperacoes">A fila de operações que será validada.</param>
         /// <returns>True se a fila não estiver vazia, False caso contrário.</returns>
-        private static bool ValidarFila(Queue<Operacoes> fila)
+        private static bool ValidarFila(Queue<Operacoes> filaOperacoes)
         {
-            if (fila.Count == 0)
+            if (filaOperacoes.Count == 0)
             {
                 ImprimirSeparador();
                 ImprimirMensagem("Não há mais operações na fila.", ConsoleColor.Red);
@@ -69,10 +69,10 @@ namespace Calculadora
         /// <summary>
         /// Imprime as operações na fila.
         /// </summary>
-        /// <param name="fila">A fila de operações.</param>
-        private static void ImprimirOperacoes(Queue<Operacoes> fila)
+        /// <param name="filaOperacoes">A fila de operações.</param>
+        private static void ImprimirOperacoes(Queue<Operacoes> filaOperacoes)
         {
-            foreach (Operacoes operacao in fila)
+            foreach (Operacoes operacao in filaOperacoes)
             {
                 Console.WriteLine($"{operacao.ValorA} {operacao.Operador} {operacao.ValorB}");
             }
