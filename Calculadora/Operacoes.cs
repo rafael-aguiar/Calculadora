@@ -3,10 +3,10 @@ namespace Calculadora
 {
     public class Operacoes
     {
-        public int valorA {get;set;}
-        public char operador { get; set; }
-        public int valorB { get; set; }
-        public decimal resultado { get; set; }
+        public long ValorA {get;set;}
+        public char Operador { get; set; }
+        public long ValorB { get; set; }
+        public long Resultado { get; set; }
 
     }
 }

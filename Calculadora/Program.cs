@@ -6,27 +6,52 @@ namespace Calculadora
 {
     class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Inicia o progama montando a fila de operações e iniciando o processamento.
+        /// </summary>
+        static void Main()
         {
-            Queue<Operacoes> filaOperacoes = new Queue<Operacoes>();
-            filaOperacoes.Enqueue(new Operacoes { valorA = 2, valorB = 3, operador = '+' });
-            filaOperacoes.Enqueue(new Operacoes { valorA = 14, valorB = 8, operador = '-' });
-            filaOperacoes.Enqueue(new Operacoes { valorA = 5, valorB = 6, operador = '*' });
-            filaOperacoes.Enqueue(new Operacoes { valorA = 2147483647, valorB = 2, operador = '+' });
-            filaOperacoes.Enqueue(new Operacoes { valorA = 18, valorB = 3, operador = '/' }); //Implemente o calculo de divisao
+            Queue<Operacoes> filaOperacoes = InicializarFila();
+            ProcessarOperacoes(filaOperacoes);
+        }
 
-            Calculadora calculadora = new Calculadora();
 
-            
-            while (filaOperacoes.Count >= 0)
+        /// <summary>
+        /// Monta a fila de operações.
+        /// </summary>
+        private static Queue<Operacoes> InicializarFila()
+        {
+            return new Queue<Operacoes>(new[]
             {
-                Operacoes operacao = filaOperacoes.Peek();
-                calculadora.calcular(operacao);
-                Console.WriteLine("{0} {1} {2} = {3}", operacao.valorA,operacao.operador,operacao.valorB, operacao.resultado);
+            new Operacoes { ValorA = 2, ValorB = 3, Operador = '+' },
+            new Operacoes { ValorA = 14, ValorB = 8, Operador = '-' },
+            new Operacoes { ValorA = 5, ValorB = 6, Operador = '*' },
+            new Operacoes { ValorA = 2147483647, ValorB = 2, Operador = '+' },
+            new Operacoes { ValorA = 18, ValorB = 3, Operador = '/' }
+        });
+        }
+
+        /// <summary>
+        /// Inicia o processamento da fila de operações.
+        /// </summary>
+        /// <param name="filaOperacoes">A fila de operações.</param>
+        private static void ProcessarOperacoes(Queue<Operacoes> filaOperacoes)
+        {
+            Stack<Operacoes> stackResultados = new();
+            Calculadora calculadora = new();
+
+            while (filaOperacoes.Count > 0)
+            {
+                Operacoes operacaoAtual = filaOperacoes.Dequeue();
+                calculadora.Calcular(operacaoAtual);
+
+                Impressora.ImprimirOperacaoAtual(operacaoAtual);
+                Impressora.ImprimirFila(filaOperacoes);
+
+                stackResultados.Push(operacaoAtual);
             }
 
-          
-           
+            Impressora.ImprimirStackResultados(stackResultados);
         }
     }
 }
