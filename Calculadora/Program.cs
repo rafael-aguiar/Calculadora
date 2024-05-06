@@ -9,6 +9,8 @@ namespace Calculadora
         static void Main()
         {
             Queue<Operacoes> filaOperacoes = new Queue<Operacoes>();
+            Stack<Operacoes> stackResultados = new Stack<Operacoes>();
+
             filaOperacoes.Enqueue(new Operacoes { valorA = 2, valorB = 3, operador = '+' });
             filaOperacoes.Enqueue(new Operacoes { valorA = 14, valorB = 8, operador = '-' });
             filaOperacoes.Enqueue(new Operacoes { valorA = 5, valorB = 6, operador = '*' });
@@ -20,14 +22,20 @@ namespace Calculadora
             while (filaOperacoes.Count > 0)
             {
                 Operacoes operacao = filaOperacoes.Peek();
+
                 calculadora.calcular(operacao);
 
                 Impressora.ImprimirOperacaoAtual(operacao);             
 
                 filaOperacoes.Dequeue();
+
                 Impressora.ImprimirFila(filaOperacoes);
+
+                stackResultados.Push(operacao);
                 
             }
+
+            Impressora.ImprimirStackResultados(stackResultados);
 
         }
     }
