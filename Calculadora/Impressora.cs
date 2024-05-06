@@ -6,119 +6,88 @@ namespace Calculadora
     public class Impressora
     {
         /// <summary>
-        /// Imprime todas as operações na fila de operações.
+        /// Imprime todas as operações na fila.
         /// </summary>
-        /// <param name="fila">A fila de operações a ser impressa.</param>
+        /// <param name="fila">A fila de operações que será impressa.</param>
         public static void ImprimirFila(Queue<Operacoes> fila)
         {
-            if (!ValidaFila(fila)) return;
+            if (!ValidarFila(fila))
+                return;
 
             ImprimirSeparador();
-            ImprimirMensagemOperacoesPendentes();
+            ImprimirMensagem("Próximas operações na fila:", ConsoleColor.Yellow);
             ImprimirOperacoes(fila);
             ImprimirSeparador();
-
-        }
-
-        public static void ImprimirOperacaoAtual(Operacoes operacao)
-        {
-            ImprimirMensagemOperacaoAtual();
-            Console.WriteLine("{0} {1} {2} = {3}", operacao.valorA, operacao.operador, operacao.valorB, operacao.resultado);
         }
 
         /// <summary>
-        /// Imprime todos os resultados da stack de resultados.
+        /// Imprime a operação atual sendo processada.
         /// </summary>
-        /// <param name="stack">A stack a ser validada.</param>
+        /// <param name="operacao">A operação atual que será impressa.</param>
+        public static void ImprimirOperacaoAtual(Operacoes operacao)
+        {
+            ImprimirMensagem("Operação atual:", ConsoleColor.Green);
+            Console.WriteLine($"{operacao.ValorA} {operacao.Operador} {operacao.ValorB} = {operacao.Resultado}");
+        }
+
+        /// <summary>
+        /// Imprime todos os resultados das operações armazenadas na stack de resultados.
+        /// </summary>
+        /// <param name="stack">A stack de resultados que será impressa.</param>
         public static void ImprimirStackResultados(Stack<Operacoes> stack)
         {
             Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
             ImprimirSeparador();
-            ImprimirMensagemResultados();
+            ImprimirMensagem("Resultados das operações:", ConsoleColor.Green);
+
             while (stack.Count > 0)
             {
-                ImprimirSeparador();
                 Operacoes operacao = stack.Pop();
-                //Console.WriteLine("{0} {1} {2} = {3}", operacao.valorA, operacao.operador, operacao.valorB, operacao.resultado);
-                Console.WriteLine(operacao.resultado);
+                Console.WriteLine($"{operacao.Resultado}");
             }
+
             ImprimirSeparador();
-            Console.WriteLine();
-            Console.WriteLine();
             Console.WriteLine();
         }
 
-
-
         /// <summary>
-        /// Verifica se a fila de operações está vazia e imprime uma mensagem caso esteja.
+        /// Valida se a fila de operações está vazia e imprime uma mensagem caso esteja.
         /// </summary>
-        /// <param name="fila">A fila a ser validada.</param>
+        /// <param name="fila">A fila de operações que será validada.</param>
         /// <returns>True se a fila não estiver vazia, False caso contrário.</returns>
-        private static bool ValidaFila(Queue<Operacoes> fila)
+        private static bool ValidarFila(Queue<Operacoes> fila)
         {
             if (fila.Count == 0)
             {
                 ImprimirSeparador();
-                ImprimirMensagemNenhumaOperacao();
+                ImprimirMensagem("Não há mais operações na fila.", ConsoleColor.Red);
                 return false;
             }
             return true;
         }
 
         /// <summary>
-        /// Imprime uma mensagem para operações pendentes na fila.
-        /// </summary>
-        private static void ImprimirMensagemOperacoesPendentes()
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Próximas operações na fila:");
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Imprime uma mensagem para a operação que está sendo processada.
-        /// </summary>
-        private static void ImprimirMensagemOperacaoAtual()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Operação atual:");
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Imprime uma mensagem indicando que não há mais operações na fila.
-        /// </summary>
-        private static void ImprimirMensagemNenhumaOperacao()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Não há mais operações na fila.");
-            Console.ResetColor();
-            ImprimirSeparador();
-        }
-
-        /// <summary>
-        /// Imprime uma mensagem para a impressão dos resultados
-        private static void ImprimirMensagemResultados()
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Resultados das operações:");
-            Console.ResetColor();
-        }
-
-        /// <summary>
-        /// Imprime todas as operações na fila.
+        /// Imprime as operações na fila.
         /// </summary>
         /// <param name="fila">A fila de operações.</param>
         private static void ImprimirOperacoes(Queue<Operacoes> fila)
         {
             foreach (Operacoes operacao in fila)
             {
-
-                Console.WriteLine("{0} {1} {2}", operacao.valorA, operacao.operador, operacao.valorB);
+                Console.WriteLine($"{operacao.ValorA} {operacao.Operador} {operacao.ValorB}");
             }
+        }
+
+        /// <summary>
+        /// Imprime uma mensagem formatada com uma cor especificada.
+        /// </summary>
+        /// <param name="mensagem">A mensagem a ser impressa.</param>
+        /// <param name="cor">A cor do texto da mensagem.</param>
+        private static void ImprimirMensagem(string mensagem, ConsoleColor cor)
+        {
+            Console.ForegroundColor = cor;
+            Console.WriteLine(mensagem);
+            Console.ResetColor();
         }
 
         /// <summary>

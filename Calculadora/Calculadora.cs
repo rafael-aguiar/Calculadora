@@ -3,36 +3,52 @@ namespace Calculadora
 {
     public class Calculadora
     {
-        
-        public Operacoes calcular(Operacoes operacao)
+        public Operacoes Calcular(Operacoes operacao)
         {
-            switch(operacao.operador)
+            switch (operacao.Operador)
             {
-                case '+': operacao.resultado= soma(operacao);break;
-                case '-': operacao.resultado = subtracao(operacao);break;
-                case '*': operacao.resultado = multiplicacao(operacao);break;
-                case '/': operacao.resultado = divisao(operacao); break;
-                default: operacao.resultado = 0; break;
+                case '+':
+                    operacao.Resultado = Somar(operacao);
+                    break;
+                case '-':
+                    operacao.Resultado = Subtrair(operacao);
+                    break;
+                case '*':
+                    operacao.Resultado = Multiplicar(operacao);
+                    break;
+                case '/':
+                    operacao.Resultado = Dividir(operacao);
+                    break;
+                default:
+                    operacao.Resultado = 0;
+                    break;
             }
             return operacao;
         }
-        public long soma(Operacoes operacao)
-        {
-            return operacao.valorA + operacao.valorB;
-        }
-        public long subtracao(Operacoes operacao)
-        {
-            return operacao.valorA - operacao.valorB;
-        }
-        public long multiplicacao(Operacoes operacao)
-        {
-            return operacao.valorA * operacao.valorB;
-        }
-        public long divisao(Operacoes operacao)
-        {
 
-            return operacao.valorA / operacao.valorB;
+        private static long Somar(Operacoes operacao)
+        {
+            return operacao.ValorA + operacao.ValorB;
         }
 
+        private static long Subtrair(Operacoes operacao)
+        {
+            return operacao.ValorA - operacao.ValorB;
+        }
+
+        private static long Multiplicar(Operacoes operacao)
+        {
+            return operacao.ValorA * operacao.ValorB;
+        }
+
+        private static long Dividir(Operacoes operacao)
+        {
+            if (operacao.ValorB == 0)
+            {
+                throw new DivideByZeroException("Não é possível dividir por zero.");
+            }
+            return operacao.ValorA / operacao.ValorB;
+        }
     }
+
 }

@@ -8,35 +8,39 @@ namespace Calculadora
     {
         static void Main()
         {
-            Queue<Operacoes> filaOperacoes = new Queue<Operacoes>();
-            Stack<Operacoes> stackResultados = new Stack<Operacoes>();
+            Queue<Operacoes> filaOperacoes = InicializarOperacoes();
+            ProcessarOperacoes(filaOperacoes);
+        }
 
-            filaOperacoes.Enqueue(new Operacoes { valorA = 2, valorB = 3, operador = '+' });
-            filaOperacoes.Enqueue(new Operacoes { valorA = 14, valorB = 8, operador = '-' });
-            filaOperacoes.Enqueue(new Operacoes { valorA = 5, valorB = 6, operador = '*' });
-            filaOperacoes.Enqueue(new Operacoes { valorA = 2147483647, valorB = 2, operador = '+' });
-            filaOperacoes.Enqueue(new Operacoes { valorA = 18, valorB = 3, operador = '/' });
+        private static Queue<Operacoes> InicializarOperacoes()
+        {
+            return new Queue<Operacoes>(new[]
+            {
+            new Operacoes { ValorA = 2, ValorB = 3, Operador = '+' },
+            new Operacoes { ValorA = 14, ValorB = 8, Operador = '-' },
+            new Operacoes { ValorA = 5, ValorB = 6, Operador = '*' },
+            new Operacoes { ValorA = 2147483647, ValorB = 2, Operador = '+' },
+            new Operacoes { ValorA = 18, ValorB = 3, Operador = '/' }
+        });
+        }
 
-            Calculadora calculadora = new Calculadora();
+        private static void ProcessarOperacoes(Queue<Operacoes> filaOperacoes)
+        {
+            Stack<Operacoes> stackResultados = new();
+            Calculadora calculadora = new();
 
             while (filaOperacoes.Count > 0)
             {
-                Operacoes operacao = filaOperacoes.Peek();
+                Operacoes operacaoAtual = filaOperacoes.Dequeue();
+                calculadora.Calcular(operacaoAtual);
 
-                calculadora.calcular(operacao);
-
-                Impressora.ImprimirOperacaoAtual(operacao);             
-
-                filaOperacoes.Dequeue();
-
+                Impressora.ImprimirOperacaoAtual(operacaoAtual);
                 Impressora.ImprimirFila(filaOperacoes);
 
-                stackResultados.Push(operacao);
-                
+                stackResultados.Push(operacaoAtual);
             }
 
             Impressora.ImprimirStackResultados(stackResultados);
-
         }
     }
 }
