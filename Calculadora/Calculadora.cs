@@ -6,7 +6,7 @@ namespace Calculadora
         /// <summary>
         /// Realiza a operação
         /// </summary>
-        /// <param name="operacao">A operação que será realizada.</para
+        /// <param name="operacao">A operação que será realizada.</param>
         public Operacoes Calcular(Operacoes operacao)
         {
             switch (operacao.Operador)
@@ -33,7 +33,7 @@ namespace Calculadora
         /// <summary>
         /// Realiza a soma entre o Valor A e o Valor B.
         /// </summary>
-        /// <param name="operacao">A operação que será realizada.</para
+        /// <param name="operacao">A operação que será realizada.</param>
         private static long Somar(Operacoes operacao)
         {
             return operacao.ValorA + operacao.ValorB;
@@ -42,7 +42,7 @@ namespace Calculadora
         /// <summary>
         /// Realiza a subtração entre o Valor A e o Valor B.
         /// </summary>
-        /// <param name="operacao">A operação que será realizada.</para
+        /// <param name="operacao">A operação que será realizada.</param>
         private static long Subtrair(Operacoes operacao)
         {
             return operacao.ValorA - operacao.ValorB;
@@ -51,7 +51,7 @@ namespace Calculadora
         /// <summary>
         /// Realiza a multiplicação entre o Valor A e o Valor B.
         /// </summary>
-        /// <param name="operacao">A operação que será realizada.</para
+        /// <param name="operacao">A operação que será realizada.</param>
         private static long Multiplicar(Operacoes operacao)
         {
             return operacao.ValorA * operacao.ValorB;
@@ -61,7 +61,7 @@ namespace Calculadora
         /// Realiza a divisão entre o Valor A e o Valor B.
         /// Retorna uma exception em caso do dividendo ser zero.
         /// </summary>
-        /// <param name="operacao">A operação que será realizada.</para
+        /// <param name="operacao">A operação que será realizada.</param>
         private static long Dividir(Operacoes operacao)
         {
             if (operacao.ValorB == 0)
